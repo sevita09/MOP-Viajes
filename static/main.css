@@ -1,0 +1,64 @@
+/* Variables y estilos globales */
+
+:root {
+  --topbar-h: 48px;
+  --statsbar-h: 104px;
+  --panel-w: 210px;
+}
+
+/* Modo oscuro */
+body.dark {
+  --bg-app:        #13151a;
+  --bg-topbar:     #1e2025;
+  --bg-panel:      #15171e;
+  --bg-stat-card:  #111b2e;
+  --border-card:   rgba(55, 138, 221, 0.18);
+  --text-primary:  #cdd2da;
+  --text-secondary:#8a9bb0;
+  --text-muted:    #2d3a50;
+  --accent:        #378ADD;
+  --accent-value:  #7ab3e8;
+  --divider:       rgba(255, 255, 255, 0.05);
+}
+
+/* Modo claro */
+body.light {
+  --bg-app:        #eef0f5;
+  --bg-topbar:     #f8f9fb;
+  --bg-panel:      #f8f9fb;
+  --bg-stat-card:  #e8f1fb;
+  --border-card:   #b5cfe8;
+  --text-primary:  #2c3040;
+  --text-secondary:#5a6a7a;
+  --text-muted:    #9aa8b8;
+  --accent:        #185FA5;
+  --accent-value:  #185FA5;
+  --divider:       #dde1e8;
+}
+
+/* Reset y layout base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-app);
+  color: var(--text-primary);
+}
+
+#app-body {
+  display: flex;
+  height: calc(100vh - var(--topbar-h));
+}
+
+#main-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}

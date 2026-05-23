@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOP — Viajes</title>
+
+  <link rel="stylesheet" href="/static/main.css" />
+  <link rel="stylesheet" href="/static/topbar/topbar.css" />
+  <link rel="stylesheet" href="/static/statsbar/statsbar.css" />
+  <link rel="stylesheet" href="/static/mapa/mapa.css" />
+  <link rel="stylesheet" href="/static/mis-viajes/mis-viajes.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body class="dark">
+
+  <!-- Topbar -->
+  <header id="topbar"></header>
+
+  <!-- Layout principal -->
+  <div id="app-body">
+
+    <!-- Columna izquierda: stats + mapa -->
+    <div id="main-col">
+      <div id="statsbar"></div>
+      <div id="mapa"></div>
+    </div>
+
+    <!-- Panel lateral: mis viajes -->
+    <aside id="mis-viajes"></aside>
+
+  </div>
+
+  <!-- Modal agregar/editar viaje -->
+  <div id="modal-overlay" class="hidden"></div>
+  <div id="modal" class="hidden"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/static/topbar/topbar.js"></script>
+  <script src="/static/statsbar/statsbar.js"></script>
+  <script src="/static/mapa/mapa.js"></script>
+  <script src="/static/mis-viajes/mis-viajes.js"></script>
+  <script src="/static/mis-viajes/modal.js"></script>
+</body>
+</html>
