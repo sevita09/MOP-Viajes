@@ -1,0 +1,9 @@
+#mis-viajes {
+  width: var(--panel-w);
+  height: 100%;
+  background: var(--bg-panel);
+  border-left: 0.5px solid var(--divider);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}

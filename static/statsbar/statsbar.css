@@ -1,0 +1,7 @@
+#statsbar {
+  height: var(--statsbar-h);
+  padding: 10px 14px;
+  display: flex;
+  gap: 10px;
+  border-bottom: 0.5px solid var(--divider);
+}
