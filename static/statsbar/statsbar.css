@@ -1,7 +1,44 @@
 #statsbar {
   height: var(--statsbar-h);
-  padding: 10px 14px;
+  padding: 16px 20px;
   display: flex;
-  gap: 10px;
+  justify-content: space-evenly;
   border-bottom: 0.5px solid var(--divider);
+  flex-shrink: 0;
+}
+
+/* ── Card ─────────────────────────────────────────────────── */
+
+.stat-card {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: var(--bg-stat-card);
+  border: 0.5px solid var(--border-card);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  height: 120px;
+  align-self: center;
+}
+
+/* ── Valor numérico ───────────────────────────────────────── */
+
+.stat-value {
+  font-weight: 600;
+  color: var(--accent-value);
+  line-height: 1;
+  transition: font-size 0.2s ease;
+}
+
+/* ── Label ────────────────────────────────────────────────── */
+
+.stat-label {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
