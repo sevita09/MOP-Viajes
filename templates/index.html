@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MOP — Viajes</title>
+  <script>
+    // Aplica el tema guardado antes de renderizar para evitar flash
+    const t = localStorage.getItem('mop_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+    document.addEventListener('DOMContentLoaded', () => document.body.classList.add(t));
+  </script>
 
   <link rel="stylesheet" href="/static/main.css" />
   <link rel="stylesheet" href="/static/topbar/topbar.css" />
