@@ -1,1 +1,23 @@
-[]
+[
+  { "id": "city_001", "name": "París",            "country": "Francia",        "countryCode": "FR", "continent": "Europa",           "lat": 48.8566,  "lng": 2.3522   },
+  { "id": "city_002", "name": "Roma",             "country": "Italia",         "countryCode": "IT", "continent": "Europa",           "lat": 41.9028,  "lng": 12.4964  },
+  { "id": "city_003", "name": "Barcelona",        "country": "España",         "countryCode": "ES", "continent": "Europa",           "lat": 41.3851,  "lng": 2.1734   },
+  { "id": "city_004", "name": "Berlín",           "country": "Alemania",       "countryCode": "DE", "continent": "Europa",           "lat": 52.5200,  "lng": 13.4050  },
+  { "id": "city_005", "name": "Lisboa",           "country": "Portugal",       "countryCode": "PT", "continent": "Europa",           "lat": 38.7223,  "lng": -9.1393  },
+  { "id": "city_006", "name": "Bangkok",          "country": "Tailandia",      "countryCode": "TH", "continent": "Asia",             "lat": 13.7563,  "lng": 100.5018 },
+  { "id": "city_007", "name": "Hanói",            "country": "Vietnam",        "countryCode": "VN", "continent": "Asia",             "lat": 21.0278,  "lng": 105.8342 },
+  { "id": "city_008", "name": "Siem Reap",        "country": "Camboya",        "countryCode": "KH", "continent": "Asia",             "lat": 13.3671,  "lng": 103.8448 },
+  { "id": "city_009", "name": "Bali",             "country": "Indonesia",      "countryCode": "ID", "continent": "Asia",             "lat": -8.3405,  "lng": 115.0920 },
+  { "id": "city_010", "name": "Bariloche",        "country": "Argentina",      "countryCode": "AR", "continent": "América del Sur",  "lat": -41.1335, "lng": -71.3103 },
+  { "id": "city_011", "name": "Torres del Paine", "country": "Chile",          "countryCode": "CL", "continent": "América del Sur",  "lat": -50.9423, "lng": -73.4068 },
+  { "id": "city_012", "name": "Ciudad de México", "country": "México",         "countryCode": "MX", "continent": "América del Norte", "lat": 19.4326,  "lng": -99.1332 },
+  { "id": "city_013", "name": "Marrakech",        "country": "Marruecos",      "countryCode": "MA", "continent": "África",           "lat": 31.6295,  "lng": -7.9811  },
+  { "id": "city_014", "name": "Tokio",            "country": "Japón",          "countryCode": "JP", "continent": "Asia",             "lat": 35.6762,  "lng": 139.6503 },
+  { "id": "city_015", "name": "Kioto",            "country": "Japón",          "countryCode": "JP", "continent": "Asia",             "lat": 35.0116,  "lng": 135.7681 },
+  { "id": "city_016", "name": "Osaka",            "country": "Japón",          "countryCode": "JP", "continent": "Asia",             "lat": 34.6937,  "lng": 135.5023 },
+  { "id": "city_017", "name": "Atenas",           "country": "Grecia",         "countryCode": "GR", "continent": "Europa",           "lat": 37.9838,  "lng": 23.7275  },
+  { "id": "city_018", "name": "Santorini",        "country": "Grecia",         "countryCode": "GR", "continent": "Europa",           "lat": 36.3932,  "lng": 25.4615  },
+  { "id": "city_019", "name": "Nueva York",       "country": "Estados Unidos", "countryCode": "US", "continent": "América del Norte", "lat": 40.7128,  "lng": -74.0060 },
+  { "id": "city_020", "name": "Cartagena",        "country": "Colombia",       "countryCode": "CO", "continent": "América del Sur",  "lat": 10.3910,  "lng": -75.4794 },
+  { "id": "city_021", "name": "Medellín",         "country": "Colombia",       "countryCode": "CO", "continent": "América del Sur",  "lat": 6.2442,   "lng": -75.5812 }
+]

@@ -1,1 +1,65 @@
-[]
+[
+  {
+    "id": "trip_001",
+    "name": "Europa",
+    "startDate": "2024-06-01",
+    "endDate": "2024-08-15",
+    "cityIds": ["city_001", "city_002", "city_003", "city_004", "city_005"]
+  },
+  {
+    "id": "trip_002",
+    "name": "Sudeste Asiático",
+    "startDate": "2024-01-10",
+    "endDate": "2024-02-05",
+    "cityIds": ["city_006", "city_007", "city_008", "city_009"]
+  },
+  {
+    "id": "trip_003",
+    "name": "Patagonia",
+    "startDate": "2023-12-20",
+    "endDate": "2024-01-03",
+    "cityIds": ["city_010", "city_011"]
+  },
+  {
+    "id": "trip_004",
+    "name": "México",
+    "startDate": "2023-03-15",
+    "endDate": "2023-03-28",
+    "cityIds": ["city_012"]
+  },
+  {
+    "id": "trip_005",
+    "name": "Marruecos",
+    "startDate": "2022-09-01",
+    "endDate": "2022-09-14",
+    "cityIds": ["city_013"]
+  },
+  {
+    "id": "trip_006",
+    "name": "Japón",
+    "startDate": "2022-03-20",
+    "endDate": "2022-04-10",
+    "cityIds": ["city_014", "city_015", "city_016"]
+  },
+  {
+    "id": "trip_007",
+    "name": "Grecia",
+    "startDate": "2021-07-05",
+    "endDate": "2021-07-22",
+    "cityIds": ["city_017", "city_018"]
+  },
+  {
+    "id": "trip_008",
+    "name": "Nueva York",
+    "startDate": "2021-02-10",
+    "endDate": "2021-02-18",
+    "cityIds": ["city_019"]
+  },
+  {
+    "id": "trip_009",
+    "name": "Colombia",
+    "startDate": "2020-11-01",
+    "endDate": "2020-11-15",
+    "cityIds": ["city_020", "city_021"]
+  }
+]
