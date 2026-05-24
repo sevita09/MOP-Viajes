@@ -2,8 +2,8 @@
 
 :root {
   --topbar-h: 48px;
-  --statsbar-h: 104px;
-  --panel-w: 210px;
+  --statsbar-h: 160px;
+  --panel-w: 360px;
 }
 
 /* Modo oscuro */
