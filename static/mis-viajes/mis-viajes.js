@@ -27,6 +27,27 @@ function calcDays(startStr, endStr) {
   return Math.round((e - s) / (1000 * 60 * 60 * 24)) + 1;
 }
 
+function haversine(lat1, lng1, lat2, lng2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLng = (lng2 - lng1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) ** 2 +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function calcKm(trip) {
+  const cities = trip.cityIds
+    .map(id => allCities.find(c => c.id === id))
+    .filter(Boolean);
+  let total = 0;
+  for (let i = 0; i < cities.length - 1; i++) {
+    total += haversine(cities[i].lat, cities[i].lng, cities[i + 1].lat, cities[i + 1].lng);
+  }
+  return Math.round(total).toLocaleString('es-AR');
+}
+
 function getCountryCodes(trip) {
   const codes = trip.cityIds
     .map(id => allCities.find(c => c.id === id))
@@ -77,7 +98,7 @@ function renderList(trips) {
         <div class="viajesbar-card" data-id="${trip.id}">
           <span class="card-name">${trip.name}</span>
           <span class="card-date">${formatDateLabel(trip.startDate, trip.endDate)}</span>
-          <span class="card-days">${calcDays(trip.startDate, trip.endDate)} días</span>
+          <span class="card-days">${calcDays(trip.startDate, trip.endDate)} días  —  ${trip.cityIds.length} ${trip.cityIds.length === 1 ? 'ciudad' : 'ciudades'}  —  ${calcKm(trip)} km</span>
           <div class="card-flags">
             ${countries.map(c => `<span class="card-flag">${flag(c)}</span>`).join('')}
           </div>
