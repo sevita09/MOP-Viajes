@@ -5,7 +5,7 @@ function getTheme() {
   return localStorage.getItem(THEME_KEY) || 'dark';
 }
 
-function applyTheme(theme) {
+function applyTopbarTheme(theme) {
   document.body.classList.remove('dark', 'light');
   document.body.classList.add(theme);
   document.dispatchEvent(new CustomEvent('themechange', { detail: { theme } }));
@@ -30,7 +30,7 @@ function buildTopbar() {
   document.getElementById('theme-toggle').addEventListener('click', () => {
     const next = getTheme() === 'dark' ? 'light' : 'dark';
     localStorage.setItem(THEME_KEY, next);
-    applyTheme(next);
+    applyTopbarTheme(next);
     updateThemeIcon(next);
   });
 }
@@ -44,6 +44,6 @@ function updateThemeIcon(theme) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  applyTheme(getTheme());
+  applyTopbarTheme(getTheme());
   buildTopbar();
 });

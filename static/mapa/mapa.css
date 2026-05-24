@@ -2,3 +2,76 @@
   flex: 1;
   min-height: 0;
 }
+
+/* ── Tooltip ──────────────────────────────────────────────── */
+
+.mapa-tooltip {
+  background:    #0d1320 !important;
+  border:        0.5px solid rgba(55, 138, 221, 0.45) !important;
+  border-radius: 7px !important;
+  padding:       8px 12px !important;
+  box-shadow:    none !important;
+  display:       flex;
+  flex-direction: column;
+  gap:           3px;
+}
+
+/* Flecha del tooltip */
+.mapa-tooltip::before {
+  border-top-color: rgba(55, 138, 221, 0.45) !important;
+}
+.mapa-tooltip::after {
+  border-top-color: #0d1320 !important;
+}
+
+.tooltip-city {
+  display:     block;
+  color:       #7ab3e8;
+  font-size:   14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tooltip-country {
+  display:     block;
+  color:       #2d5070;
+  font-size:   11px;
+  line-height: 1.2;
+}
+
+/* ── Leyenda ──────────────────────────────────────────────── */
+
+.mapa-legend {
+  background:    rgba(13, 19, 32, 0.75);
+  border:        0.5px solid rgba(55, 138, 221, 0.2);
+  border-radius: 7px;
+  padding:       8px 12px;
+  display:       flex;
+  flex-direction: column;
+  gap:           6px;
+  font-size:     11px;
+  color:         #8a9bb0;
+  backdrop-filter: blur(4px);
+}
+
+.legend-item {
+  display:     flex;
+  align-items: center;
+  gap:         8px;
+}
+
+.legend-country-box {
+  width:         12px;
+  height:        12px;
+  background:    #1a5fa8;
+  border:        1px solid #2a7fd4;
+  border-radius: 2px;
+  flex-shrink:   0;
+}
+
+.legend-route-line {
+  width:       20px;
+  height:      0;
+  border-top:  1.5px dashed #378ADD;
+  flex-shrink: 0;
+}
