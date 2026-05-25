@@ -163,6 +163,29 @@ body.light input[type="date"]::-webkit-calendar-picker-indicator {
   gap: 6px;
 }
 
+.modal-city-row.dragging {
+  opacity: 0.35;
+}
+
+.modal-city-row.drag-over {
+  outline: 1px dashed rgba(55, 138, 221, 0.5);
+  border-radius: 6px;
+}
+
+.modal-city-drag {
+  cursor: grab;
+  color: var(--text-muted);
+  font-size: 15px;
+  padding: 4px 2px;
+  user-select: none;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.modal-city-drag:active {
+  cursor: grabbing;
+}
+
 .modal-city-input-wrap {
   position: relative;
   flex: 1;

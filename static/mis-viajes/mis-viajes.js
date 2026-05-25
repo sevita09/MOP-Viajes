@@ -2,7 +2,8 @@
 
 const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
-let allCities = [];
+let allCities    = [];
+let selectedTrip = null;
 
 function flag(code) {
   return code.toUpperCase().split('').map(c =>
@@ -112,7 +113,12 @@ function renderList(trips) {
     card.addEventListener('click', () => {
       const isSelected = card.classList.contains('selected');
       list.querySelectorAll('.viajesbar-card').forEach(c => c.classList.remove('selected'));
-      if (!isSelected) card.classList.add('selected');
+      if (!isSelected) {
+        card.classList.add('selected');
+        selectedTrip = trips.find(t => t.id === card.dataset.id) || null;
+      } else {
+        selectedTrip = null;
+      }
     });
   });
 }
@@ -122,13 +128,30 @@ async function loadData() {
     fetch('/api/trips').then(r => r.json()),
     fetch('/api/cities').then(r => r.json())
   ]);
-  allCities = cities;
+  allCities    = cities;
+  selectedTrip = null;
   renderList(trips);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   buildViajesBar();
   loadData();
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#btn-edit')) return;
+    if (!selectedTrip) {
+      const btn = document.getElementById('btn-edit');
+      btn.classList.remove('shake');
+      void btn.offsetWidth;
+      btn.classList.add('shake');
+      btn.addEventListener('animationend', () => btn.classList.remove('shake'), { once: true });
+      return;
+    }
+    const cities = selectedTrip.cityIds
+      .map(id => allCities.find(c => c.id === id))
+      .filter(Boolean);
+    window.openModal('edit', { trip: selectedTrip, cities });
+  });
 });
 
 document.addEventListener('trips:updated', loadData);

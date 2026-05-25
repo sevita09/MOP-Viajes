@@ -105,7 +105,20 @@ def create_trip():
 
 @app.route('/api/trips/<trip_id>', methods=['PUT'])
 def update_trip(trip_id):
-    pass
+    data  = request.get_json()
+    trips = read_json(TRIPS_FILE)
+    for i, trip in enumerate(trips):
+        if trip['id'] == trip_id:
+            trips[i] = {
+                'id':        trip_id,
+                'name':      data['name'],
+                'startDate': data['startDate'],
+                'endDate':   data['endDate'],
+                'cityIds':   data['cityIds'],
+            }
+            write_json(TRIPS_FILE, trips)
+            return jsonify(trips[i])
+    return jsonify({'error': 'Trip not found'}), 404
 
 
 @app.route('/api/trips/<trip_id>', methods=['DELETE'])

@@ -24,7 +24,8 @@ function debounce(fn, ms) {
 
 function cityRowHTML() {
   return `
-    <div class="modal-city-row">
+    <div class="modal-city-row" draggable="true">
+      <span class="modal-city-drag" title="Arrastrar">⠿</span>
       <div class="modal-city-input-wrap">
         <input class="modal-input modal-city-input" type="text" placeholder="Buscar ciudad..." />
         <div class="modal-autocomplete hidden"></div>
@@ -95,6 +96,34 @@ function attachCityRowListeners(row) {
   });
 }
 
+function attachDragListeners(row) {
+  row.addEventListener('dragstart', e => {
+    e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => row.classList.add('dragging'), 0);
+  });
+
+  row.addEventListener('dragend', () => {
+    row.classList.remove('dragging');
+    citiesEl.querySelectorAll('.drag-over').forEach(r => r.classList.remove('drag-over'));
+  });
+
+  row.addEventListener('dragover', e => {
+    e.preventDefault();
+    const dragging = citiesEl.querySelector('.dragging');
+    if (!dragging || dragging === row) return;
+    row.classList.add('drag-over');
+    const rect = row.getBoundingClientRect();
+    if (e.clientY < rect.top + rect.height / 2) {
+      citiesEl.insertBefore(dragging, row);
+    } else {
+      citiesEl.insertBefore(dragging, row.nextSibling);
+    }
+  });
+
+  row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+  row.addEventListener('drop',      () => row.classList.remove('drag-over'));
+}
+
 function addCityRow() {
   const wrapper = document.createElement('div');
   wrapper.innerHTML = cityRowHTML();
@@ -102,6 +131,7 @@ function addCityRow() {
   citiesEl.appendChild(row);
   attachCityRowListeners(row);
   attachAutocompleteListeners(row);
+  attachDragListeners(row);
   return row;
 }
 
@@ -117,9 +147,31 @@ function resetForm() {
 
 // ── Abrir / cerrar ────────────────────────────────────────────────
 
-function openModal(mode = 'add') {
+let currentTripId = null;
+
+function openModal(mode = 'add', data = null) {
   titleEl.textContent = mode === 'edit' ? 'Editar viaje' : 'Agregar viaje';
   resetForm();
+
+  if (mode === 'edit' && data) {
+    currentTripId    = data.trip.id;
+    inputName.value  = data.trip.name;
+    inputStart.value = data.trip.startDate;
+    inputEnd.value   = data.trip.endDate;
+
+    citiesEl.innerHTML = '';
+    const tripCities = data.cities.length ? data.cities : [];
+    tripCities.forEach(city => {
+      const row   = addCityRow();
+      const input = row.querySelector('.modal-city-input');
+      input.value     = `${city.name}, ${city.country}`;
+      input._cityData = city;
+    });
+    if (!tripCities.length) addCityRow();
+  } else {
+    currentTripId = null;
+  }
+
   overlayEl.classList.remove('hidden');
   modalEl.classList.remove('hidden');
   overlayEl.style.display = 'block';
@@ -167,17 +219,23 @@ saveBtn.addEventListener('click', async () => {
   try {
     const cityIds = [];
     for (const city of selectedCities) {
-      const res  = await fetch('/api/cities', {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(city),
-      });
-      const data = await res.json();
-      cityIds.push(data.id);
+      if (city.id) {
+        cityIds.push(city.id);
+      } else {
+        const res  = await fetch('/api/cities', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify(city),
+        });
+        const data = await res.json();
+        cityIds.push(data.id);
+      }
     }
 
-    await fetch('/api/trips', {
-      method:  'POST',
+    const url    = currentTripId ? `/api/trips/${currentTripId}` : '/api/trips';
+    const method = currentTripId ? 'PUT' : 'POST';
+    await fetch(url, {
+      method,
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ name, startDate, endDate, cityIds }),
     });
