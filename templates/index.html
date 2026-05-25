@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/static/statsbar/statsbar.css" />
   <link rel="stylesheet" href="/static/mapa/mapa.css" />
   <link rel="stylesheet" href="/static/mis-viajes/mis-viajes.css" />
+  <link rel="stylesheet" href="/static/mis-viajes/modal.css" />
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
@@ -40,7 +41,69 @@
 
   <!-- Modal agregar/editar viaje -->
   <div id="modal-overlay" class="hidden"></div>
-  <div id="modal" class="hidden"></div>
+  <div id="modal" class="hidden">
+    <div class="modal-header">
+      <span class="modal-title">Agregar viaje</span>
+      <button class="modal-close" title="Cerrar">✕</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-field">
+        <label class="modal-label">Nombre</label>
+        <input class="modal-input" type="text" placeholder="Ej: Europa 2024" />
+      </div>
+
+      <div class="modal-row">
+        <div class="modal-field">
+          <label class="modal-label">Inicio</label>
+          <input class="modal-input" type="date" />
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">Fin</label>
+          <input class="modal-input" type="date" />
+        </div>
+      </div>
+
+      <div class="modal-field">
+        <label class="modal-label">Ciudades</label>
+        <div class="modal-cities" id="modal-cities">
+          <div class="modal-city-row">
+            <div class="modal-city-input-wrap">
+              <input class="modal-input modal-city-input" type="text" placeholder="Buscar ciudad..." value="Roma" />
+              <div class="modal-autocomplete">
+                <div class="modal-autocomplete-item">
+                  <div class="modal-autocomplete-item-city">Roma</div>
+                  <div class="modal-autocomplete-item-country">Italia</div>
+                </div>
+                <div class="modal-autocomplete-item">
+                  <div class="modal-autocomplete-item-city">Roma, Lacio</div>
+                  <div class="modal-autocomplete-item-country">Italia</div>
+                </div>
+                <div class="modal-autocomplete-item">
+                  <div class="modal-autocomplete-item-city">Romanshorn</div>
+                  <div class="modal-autocomplete-item-country">Suiza</div>
+                </div>
+              </div>
+            </div>
+            <button class="modal-city-remove" title="Quitar ciudad">✕</button>
+          </div>
+          <div class="modal-city-row">
+            <div class="modal-city-input-wrap">
+              <input class="modal-input modal-city-input" type="text" placeholder="Buscar ciudad..." value="Madrid, España" />
+              <div class="modal-autocomplete hidden"></div>
+            </div>
+            <button class="modal-city-remove" title="Quitar ciudad">✕</button>
+          </div>
+        </div>
+        <button class="modal-add-city">+ agregar ciudad</button>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="modal-btn modal-btn-cancel">Cancelar</button>
+      <button class="modal-btn modal-btn-save">Guardar</button>
+    </div>
+  </div>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="/static/topbar/topbar.js"></script>
