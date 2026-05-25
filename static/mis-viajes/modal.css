@@ -16,10 +16,10 @@
 
 #modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  inset: 0;
+  margin: auto;
   width: 550px;
+  height: fit-content;
   z-index: 9999;
   border-radius: 15px;
   padding: 35px;
@@ -146,9 +146,6 @@ body.light input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 225px;
-  overflow-y: auto;
-  padding-right: 2px;
 }
 
 .modal-cities::-webkit-scrollbar {
@@ -191,13 +188,10 @@ body.light input[type="date"]::-webkit-calendar-picker-indicator {
 /* ── Autocomplete dropdown ───────────────────────────────── */
 
 .modal-autocomplete {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  right: 0;
+  position: fixed;
   border-radius: 7px;
   overflow: hidden;
-  z-index: 200;
+  z-index: 10000;
   background: #0d1320;
   border: 0.5px solid rgba(55, 138, 221, 0.45);
 }

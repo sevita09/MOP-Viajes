@@ -130,3 +130,5 @@ document.addEventListener('DOMContentLoaded', () => {
   buildViajesBar();
   loadData();
 });
+
+document.addEventListener('trips:updated', loadData);
