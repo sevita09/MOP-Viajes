@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   background: rgba(10, 13, 20, 0.75);
-  z-index: 100;
+  z-index: 9998;
 }
 
 #modal-overlay.hidden,
@@ -17,18 +17,15 @@
 #modal {
   position: fixed;
   top: 50%;
-  left: calc((100vw - var(--panel-w)) / 2);
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 550px;
-  z-index: 101;
+  z-index: 9999;
   border-radius: 15px;
   padding: 35px;
   display: flex;
   flex-direction: column;
   gap: 28px;
-}
-
-body.dark #modal {
   background: #15171e;
   border: 0.5px solid rgba(55, 138, 221, 0.2);
 }
@@ -107,19 +104,16 @@ body.light #modal {
   font-family: inherit;
   outline: none;
   transition: border-color 0.15s ease;
-}
-
-body.dark .modal-input {
   background: #1a1d28;
   border: 0.5px solid rgba(55, 138, 221, 0.15);
   color: var(--text-primary);
 }
 
-body.dark .modal-input::placeholder {
+.modal-input::placeholder {
   color: var(--text-muted);
 }
 
-body.dark .modal-input:focus {
+.modal-input:focus {
   border-color: rgba(55, 138, 221, 0.5);
 }
 
@@ -137,9 +131,13 @@ body.light .modal-input:focus {
   border-color: #378ADD;
 }
 
-body.dark input[type="date"]::-webkit-calendar-picker-indicator {
+input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.5);
   cursor: pointer;
+}
+
+body.light input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: none;
 }
 
 /* ── Ciudades ────────────────────────────────────────────── */
@@ -200,9 +198,6 @@ body.dark input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 7px;
   overflow: hidden;
   z-index: 200;
-}
-
-body.dark .modal-autocomplete {
   background: #0d1320;
   border: 0.5px solid rgba(55, 138, 221, 0.45);
 }
@@ -221,24 +216,16 @@ body.light .modal-autocomplete {
   font-size: 15px;
   cursor: pointer;
   transition: background 0.1s ease;
-}
-
-body.dark .modal-autocomplete-item {
   color: var(--text-secondary);
 }
 
-body.dark .modal-autocomplete-item:hover {
+.modal-autocomplete-item:hover {
   background: rgba(55, 138, 221, 0.12);
   color: var(--text-primary);
 }
 
-body.light .modal-autocomplete-item {
-  color: var(--text-secondary);
-}
-
 body.light .modal-autocomplete-item:hover {
   background: rgba(24, 95, 165, 0.08);
-  color: var(--text-primary);
 }
 
 .modal-autocomplete-item-city {
@@ -290,33 +277,31 @@ body.light .modal-autocomplete-item:hover {
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-body.dark .modal-btn-cancel {
+.modal-btn-cancel {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
 }
 
-body.dark .modal-btn-cancel:hover {
+.modal-btn-cancel:hover {
   background: rgba(255, 255, 255, 0.04);
 }
 
 body.light .modal-btn-cancel {
-  background: transparent;
   border-color: #dde1e8;
-  color: var(--text-secondary);
 }
 
 body.light .modal-btn-cancel:hover {
   background: #eef0f5;
 }
 
-body.dark .modal-btn-save {
+.modal-btn-save {
   background: rgba(55, 138, 221, 0.2);
   border-color: rgba(55, 138, 221, 0.4);
   color: #7ab3e8;
 }
 
-body.dark .modal-btn-save:hover {
+.modal-btn-save:hover {
   background: rgba(55, 138, 221, 0.3);
 }
 
