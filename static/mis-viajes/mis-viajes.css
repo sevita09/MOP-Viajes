@@ -62,6 +62,16 @@
   opacity: 1;
 }
 
+.viajesbar-btn.shake {
+  animation: viajesbar-shake 0.35s ease;
+}
+
+@keyframes viajesbar-shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-4px); }
+  75%       { transform: translateX(4px); }
+}
+
 /* ── Lista ────────────────────────────────────────────────── */
 
 .viajesbar-list {
@@ -150,7 +160,148 @@
   line-height: 1;
 }
 
-/* Estados */
+/* ── Diálogo de confirmación ──────────────────────────────── */
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 13, 20, 0.6);
+  z-index: 10000;
+}
+
+.confirm-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 340px;
+  height: fit-content;
+  z-index: 10001;
+  border-radius: 12px;
+  padding: 28px 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  background: #15171e;
+  border: 0.5px solid rgba(55, 138, 221, 0.2);
+}
+
+body.light .confirm-dialog {
+  background: #f8f9fb;
+  border-color: #b5cfe8;
+}
+
+.confirm-message {
+  font-size: 20px;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.confirm-btn {
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: 0.5px solid transparent;
+  transition: background 0.15s ease;
+}
+
+.confirm-btn-cancel {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.confirm-btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+body.light .confirm-btn-cancel {
+  border-color: #dde1e8;
+}
+
+body.light .confirm-btn-cancel:hover {
+  background: #eef0f5;
+}
+
+.confirm-btn-delete {
+  background: rgba(210, 60, 60, 0.18);
+  border-color: rgba(210, 60, 60, 0.4);
+  color: #e08080;
+}
+
+.confirm-btn-delete:hover {
+  background: rgba(210, 60, 60, 0.3);
+}
+
+/* ── Botón lápiz activo ───────────────────────────────────── */
+
+.viajesbar-btn.active {
+  opacity: 1;
+  background: rgba(55, 138, 221, 0.15);
+  border-radius: 4px;
+}
+
+/* ── Acciones en cada card (lápiz + papelera) ─────────────── */
+
+.viajesbar-card {
+  position: relative;
+}
+
+.card-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+#mis-viajes.delete-mode .card-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.card-action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.5;
+  padding: 2px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  filter: var(--icon-filter);
+}
+
+.card-action-btn:hover {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+#mis-viajes.delete-mode .viajesbar-card {
+  cursor: default;
+}
+
+#mis-viajes.delete-mode .viajesbar-card:hover {
+  background: transparent;
+  border-color: transparent;
+}
+
+/* ── Estados ──────────────────────────────────────────────── */
 
 .viajesbar-card:hover {
   background: rgba(55, 138, 221, 0.08);
