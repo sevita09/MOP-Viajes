@@ -173,6 +173,7 @@ function renderList(trips) {
       } else {
         selectedTrip = null;
       }
+      document.dispatchEvent(new CustomEvent('trip:selected', { detail: selectedTrip }));
     });
   });
 
@@ -211,6 +212,7 @@ async function loadData() {
   selectedTrip = null;
   setDeleteMode(false);
   renderList(trips);
+  document.dispatchEvent(new CustomEvent('trip:selected', { detail: null }));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -235,3 +237,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('trips:updated', loadData);
+
+// Deseleccionar al hacer click fuera del mapa y fuera de las cards
+document.addEventListener('click', e => {
+  if (!selectedTrip) return;
+  if (e.target.closest('#mapa')) return;
+  if (e.target.closest('.viajesbar-card')) return;
+  const list = document.getElementById('viajesbar-list');
+  if (list) list.querySelectorAll('.viajesbar-card').forEach(c => c.classList.remove('selected'));
+  selectedTrip = null;
+  document.dispatchEvent(new CustomEvent('trip:selected', { detail: null }));
+});
