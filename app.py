@@ -123,7 +123,10 @@ def update_trip(trip_id):
 
 @app.route('/api/trips/<trip_id>', methods=['DELETE'])
 def delete_trip(trip_id):
-    pass
+    trips = read_json(TRIPS_FILE)
+    trips = [t for t in trips if t['id'] != trip_id]
+    write_json(TRIPS_FILE, trips)
+    return jsonify({'ok': True})
 
 
 # ── Cities ─────────────────────────────────────────────────────────
