@@ -1,13 +1,13 @@
-// Stats bar: cards globales
+// Stats bar: cards globales y por viaje seleccionado
 
 let statsTrips  = [];
 let statsCities = [];
 
 const STAT_CARDS = [
-  { key: 'paises',   label: 'Países'         },
-  { key: 'ciudades', label: 'Ciudades'        },
-  { key: 'viajes',   label: 'Viajes'          },
-  { key: 'km',       label: 'Km recorridos'   }
+  { key: 'paises',   label: 'Países',        labelTrip: 'Países'        },
+  { key: 'ciudades', label: 'Ciudades',       labelTrip: 'Ciudades'      },
+  { key: 'viajes',   label: 'Viajes',         labelTrip: 'Días'          },
+  { key: 'km',       label: 'Km recorridos',  labelTrip: 'Km recorridos' }
 ];
 
 // ── Formato de números ─────────────────────────────────────────
@@ -20,7 +20,7 @@ function numFontSize(str) {
   return str.length > 6 ? '36px' : '48px';
 }
 
-// ── Cálculo de stats globales ──────────────────────────────────
+// ── Cálculo de stats ───────────────────────────────────────────
 
 function haversine(lat1, lng1, lat2, lng2) {
   const R = 6371;
@@ -50,6 +50,23 @@ function calcGlobalStats() {
   return { paises, ciudades, viajes, km: Math.round(km) };
 }
 
+function calcTripStats(trip) {
+  const cities  = trip.cityIds.map(id => statsCities.find(c => c.id === id)).filter(Boolean);
+  const paises  = new Set(cities.map(c => c.countryCode)).size;
+  const ciudades = cities.length;
+
+  const s = new Date(trip.startDate + 'T12:00:00');
+  const e = new Date(trip.endDate   + 'T12:00:00');
+  const viajes = Math.round((e - s) / (1000 * 60 * 60 * 24)) + 1; // días
+
+  let km = 0;
+  for (let i = 0; i < cities.length - 1; i++) {
+    km += haversine(cities[i].lat, cities[i].lng, cities[i+1].lat, cities[i+1].lng);
+  }
+
+  return { paises, ciudades, viajes, km: Math.round(km) };
+}
+
 // ── Render ─────────────────────────────────────────────────────
 
 function buildStatsBar() {
@@ -57,19 +74,21 @@ function buildStatsBar() {
   bar.innerHTML = STAT_CARDS.map(card => `
     <div class="stat-card" data-key="${card.key}">
       <span class="stat-value" data-key="${card.key}">—</span>
-      <span class="stat-label">${card.label}</span>
+      <span class="stat-label" data-key="${card.key}">${card.label}</span>
     </div>
   `).join('');
 }
 
-function renderStats(stats) {
+function renderStats(stats, tripMode = false) {
   STAT_CARDS.forEach(card => {
-    const raw = stats[card.key];
-    const str = formatNum(raw);
-    const el  = document.querySelector(`.stat-value[data-key="${card.key}"]`);
-    if (!el) return;
-    el.textContent    = str;
-    el.style.fontSize = numFontSize(str);
+    const raw      = stats[card.key];
+    const str      = formatNum(raw);
+    const valEl    = document.querySelector(`.stat-value[data-key="${card.key}"]`);
+    const labelEl  = document.querySelector(`.stat-label[data-key="${card.key}"]`);
+    if (!valEl || !labelEl) return;
+    valEl.textContent    = str;
+    valEl.style.fontSize = numFontSize(str);
+    labelEl.textContent  = tripMode ? card.labelTrip : card.label;
   });
 }
 
@@ -91,3 +110,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('trips:updated', loadStatsData);
+
+document.addEventListener('trip:selected', e => {
+  const trip = e.detail;
+  if (trip) {
+    renderStats(calcTripStats(trip), true);
+  } else {
+    renderStats(calcGlobalStats(), false);
+  }
+});
